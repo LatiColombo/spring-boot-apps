@@ -111,8 +111,58 @@ public class ItemController {
         itemNotFound.put("message", "item does not exist");
 
         return (hasDelete)
-                ? ResponseEntity.noContent().build()
+                ? ResponseEntity.noContent().build()  // 200
                 : ResponseEntity.badRequest().body(NotFound);   // 400
     }*/
+
+    @PutMapping({ "/{itemId}", "/{itemId}/"})
+    public ResponseEntity putItemByIdMethod(@Valid @RequestBody ItemDTO itemData, @PathVariable Long itemId) {
+
+        Map<String, String> itemNotFound = new HashMap<>();
+        itemNotFound.put("error", HttpStatus.BAD_REQUEST.toString());
+        itemNotFound.put("message", "item id does not exist");
+
+        ItemDTO itemById = items.stream()
+                .filter(item -> item.getId().equals(itemId))
+                .peek(item -> {  // es como un for-each después del filtro. No retorna nada, se usa para actualizar
+                    item.setName(itemData.getName());
+                    item.setDescription(itemData.getDescription());
+                    item.setNumberBarcode(itemData.getNumberBarcode());
+                })
+                .findFirst()
+                .orElse(null);
+
+        return (itemById !=null)
+                ? ResponseEntity.noContent().build()  // 200
+                : ResponseEntity.badRequest().body(NotFound);   // 400
+    }
+
+    @PatchMapping({ "/{itemId}", "/{itemId}/"})
+    public ResponseEntity patchItemByIdMethod(@RequestBody ItemDTO itemData, @PathVariable Long itemId) {
+
+        Map<String, String> itemNotFound = new HashMap<>();
+        itemNotFound.put("error", HttpStatus.BAD_REQUEST.toString());
+        itemNotFound.put("message", "item id does not exist");
+
+        ItemDTO itemById = items.stream()
+                .filter(item -> item.getId().equals(itemId))
+                .peek(item -> {  // es como un for-each después del filtro. No retorna nada, se usa para actualizar
+                    if (itemData.getName() != null && !itemData.getName().trim().equals(""))
+                        item.setName(itemData.getName());
+
+                    if (itemData.getDescription() != null && !itemData.getDescription().trim().equals(""))
+                        item.setDescription(itemData.getDescription());
+
+                    if (itemData.getNumberBarcode() != null)
+                        item.setNumberBarcode(itemData.getNumberBarcode());
+
+                })
+                .findFirst()
+                .orElse(null);
+
+        return (itemById !=null)
+                ? ResponseEntity.noContent().build()  // 200
+                : ResponseEntity.badRequest().body(NotFound);   // 400
+    }
 
 }
