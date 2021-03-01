@@ -1,9 +1,6 @@
 package ar.com.ada.second.online.endpointsdefinition.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ItemDTO implements Serializable {
 
     private Long id;
