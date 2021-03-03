@@ -162,7 +162,7 @@ public class ItemController {
 
         return (itemById !=null)
                 ? ResponseEntity.noContent().build()  // 200
-                : ResponseEntity.badRequest().body(NotFound);   // 400
+                : ResponseEntity.badRequest().body(NotFound);    // 400
     }
 
 }

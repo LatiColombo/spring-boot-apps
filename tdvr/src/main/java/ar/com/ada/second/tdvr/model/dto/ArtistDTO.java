@@ -19,4 +19,8 @@ public class ArtistDTO implements Serializable {
 
     @NotBlank(message = "is required")
     private String name;
+
+    public Boolean hasNullOrEmptyAttributes() {
+        return name == null || name.trim().isEmpty();
+    }
 }
