@@ -22,5 +22,7 @@ public class ArtistDTO implements Serializable {
 
     public Boolean hasNullOrEmptyAttributes() {
         return name == null || name.trim().isEmpty();
+        // !! surname == null !! surname.trim().isEmpty();     esto si tuviera más campos, cada uno se sumaría así.
+
     }
 }

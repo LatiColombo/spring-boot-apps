@@ -114,7 +114,7 @@ public class ArtistService implements Services<ArtistDTO, Artist> {
     }
 
     @Override
-    public void mergeData(Artist entity, ArtistDTO dto) { 
+    public void mergeData(Artist entity, ArtistDTO dto) {
         if (dto.hasNullOrEmptyAttributes()) // lógica para ver si tiene campos nulos
             throw logicExceptionComponent.getExceptionEntityEmptyValues("Artist");
 
