@@ -17,7 +17,7 @@ import java.util.Optional;
 // esta capa consulta, crea, modifica y borra registros en el sistema
 
 @Service
-public class ArtistService implements Services<ArtistDTO> {
+public class ArtistService implements Services<ArtistDTO, Artist> {
 
     private ArtistMapper artistMapper = ArtistMapper.MAPPER;
 
@@ -93,11 +93,7 @@ public class ArtistService implements Services<ArtistDTO> {
         Artist artistById = artistOptional
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
 
-        if (dto.hasNullOrEmptyAttributes())
-            throw logicExceptionComponent.getExceptionEntityEmptyValues("Artist");
-
-        if (!artistById.getName().equals(dto.getName()))
-            artistById.setName(dto.getName()); // acá sustituyo el valor del campo name en la entidad del campo name (si hubiera más campos habría que hacer lo mismo por cada uno)
+        mergeData(artistById, dto);
 
         artistRepository.save(artistById);
 
@@ -114,6 +110,16 @@ public class ArtistService implements Services<ArtistDTO> {
                 .orElseThrow(() -> logicExceptionComponent.getExceptionEntityNotFound("Artist", id));
 
         artistRepository.deleteById(id);
+
+    }
+
+    @Override
+    public void mergeData(Artist entity, ArtistDTO dto) { 
+        if (dto.hasNullOrEmptyAttributes()) // lógica para ver si tiene campos nulos
+            throw logicExceptionComponent.getExceptionEntityEmptyValues("Artist");
+
+        if (!entity.getName().equals(dto.getName()))
+            entity.setName(dto.getName()); // acá sustituyo el valor del campo name en la entidad del campo name (si hubiera más campos habría que hacer lo mismo por cada uno)
 
     }
 
