@@ -21,13 +21,13 @@ import java.util.List;
 public class Album implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 30)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "smallint")
+    @Column(nullable = false, columnDefinition = "smallint") //"smallint" es dato numérico corto en sql. En java es "short"
     @Convert(converter = YearAtrributeConverter.class)
     private Year released;
 

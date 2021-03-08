@@ -1,7 +1,6 @@
 package ar.com.ada.second.tdvr.model.mapper;
 
 import ar.com.ada.second.tdvr.model.dto.AlbumDTO;
-import ar.com.ada.second.tdvr.model.dto.ArtistDTO;
 import ar.com.ada.second.tdvr.model.entity.Album;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

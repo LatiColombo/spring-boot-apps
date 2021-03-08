@@ -22,8 +22,11 @@ public class Song implements Serializable {
     @Column(nullable = false)
     private String title;
 
+    @Column(name = "songDuration", nullable = false)
+    private String songDuration;
+
     @ManyToOne
-    @JoinColumn(name = "Album_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Album_song"))
+    @JoinColumn(name = "Album_id", nullable = false, foreignKey = @ForeignKey(name = "fk_Song_Album"))
     private Album album;
 
 }
