@@ -42,7 +42,7 @@ public class AlbumDTO implements Serializable {
 
     private ArtistDTO artist;
 
-    private List<SongDTO> tracks;
+    private List<SongDTO> songs;
 
     public Boolean hasNullOrEmptyAttributes() {
         return title == null || title.trim().isEmpty()

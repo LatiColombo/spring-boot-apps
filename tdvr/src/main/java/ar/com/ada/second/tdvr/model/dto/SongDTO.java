@@ -22,7 +22,7 @@ public class SongDTO implements Serializable {
     // Patern es la validación con expresiíon regular
     @NotBlank(message = "is required")
     @Pattern(regexp = "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)$", message = "wrong format, should be HH:MM:SS")
-    private  String songDuration;
+    private  String songDuration;  // en la respuesta debe recibirse song_duration (el standard json)
 
     @JsonIgnoreProperties({ "songs" })
     private AlbumDTO album;
